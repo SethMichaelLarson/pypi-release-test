@@ -1,0 +1,33 @@
+language: python
+python: 3.6-dev
+
+install:
+  - echo "Installing dependencies"
+
+script:
+  - echo "Running tests"
+
+deploy:
+  - provider: "pypi"
+    user: "SethMichaelLarson"
+    password:
+      secure: "vyuvkYCF+vEDR5iZrxfrJb2b1AXRyo4s42yqPt0Kx97euDs/+Iu9soZ6tGg/r3V04JOMT3HiSn/0N78hG1te8OhOpXNk2fWP07DZVzaQBeRvVhtkJ0O2d3HhKfNEZ/jcTb19zkyV9QTZAQCzxxhrk5ftvfzcJDdv5X0xX7bEBbWk2jV8MVB25s06OFMDXWB1e+EIqDe3dEEsw7ylEnS/EyGWsPYrytHUPriYXF4VODELw3JGuSQqNaID05KGxLiaIEJJiaNQRvVB4cxTtMwUg3vexZ+rxg6SXNWHZwo1KkLrPk8xVjHKuzaTRr2cKyE2/nw1VMCQQwomtxPY1sufsNmtOFw8Gw7JgFsc7J5GxHR5EGh6Mf3WWYxU7QPYKkX9zm1NFtoPKezDyzzHiBrVVfANPBbO/RniV1oncdzkg9woQa29/Do8utv+0npLN7zhs9zaWkm0tgg+EBfE0NqHY5hdNrXg7KF+k7ylHKPZqiWcx4TESyAhYR3ZFKLhNvAChi0SZDlclgIbccMLXilBLFT5rJ0/qhfWxD97EEKOUiDyHKAY8KdOqE5b63Ng60FFmGHTnzpFhmIxcf6J6BS3jGGP2KTwOevlJJ7cCzcyJuB3lKAii6XjVckYXnlCHshvChQTJsaI4ZbgQw7fxQwJ5PrZOVESz11NkggeejZgI+s="
+    on:
+      branch: "master"
+      tags: true
+    distributions: "sdist"
+
+  - provider: "releases"
+    api_key:
+      secure: "YR/dHxk5KESGx4GI/1p37lpYEsGdeE9h6LZhwXeOLTrP5CD25xjojQvFu6gVSzVEbcKylTOmSEqS+8oZA36yL0FVUZa0JFv9erFSqNXQpCLdpi63SFkr16WmaMGelV/Pzw8EHP+4rT08S7p/kPJN4lJ4AzjUqmIltRvT5bOUhDsRhH1XucnGdxgdmWEBtJ0CDSPQ6MxqMibCatyNsLiqCCjrvi2LjxZfrU6oaLFkZxV/RH4gzX4vzppg4W6RsCTiq6Lv5JcZMQungqlgHV/J6mC461JvxTheT9xCaoelJUv19mzhrJ8/oDK5tEz1bca8EgWhrmgQJ/+fO3ScaIMON13Y3p8QA7Ov+Q3n3Ibe2D7bV68RaKRgB5phyIy/oH2zHj4jF0oUe5UlpmRlPcEld0xQxCxWrogONCI+UFpogF/xzQGpTPXTDsajA+iAwLL8KbWnCr6jroPNEdhSQW0DBd1ZRO4m3NlKnVL9tJjW4g50LSuPZTujD0NUGNBTJ8fEfILFQdt69COdBEq0mC7zlYhhVDtj6gF9/AuSrtq94eerdTAPPI3hzMyb0kMy643uNnIVMKe60GOrXGG+1pAVno+cJ54lF+7Vkkc8L17tTie2AZgwNmTMM+8TSMQn9TQVULuw0DjtAtAq13xyi2cLS4B8vkHoSMWs2OmIezIYVLU="
+    name: "$TRAVIS_TAG"
+    body: "This is an automated release from Travis"
+    draft: true
+    file:
+      - "dist/*"
+    file_glob: true
+    skip_cleanup: true
+    on:
+      branch: "master"
+      tags: true
+
